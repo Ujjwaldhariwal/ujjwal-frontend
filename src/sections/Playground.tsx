@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { gsap, prefersReducedMotion, scrollToId, ScrollTrigger } from '../lib/motion'
 import { haptic } from '../lib/haptics'
+import { sfx } from '../lib/sound'
+import Split from '../ui/Split'
 import { bbox, demoStroke, recognize, toPath, type Kind, type Pt } from '../lib/recognize'
 import { ShippedButton, NightToggle, TimelineSlider, CallsChart } from '../ui/Components'
 
@@ -54,6 +56,7 @@ export default function Playground() {
     }
     setHint(null)
     haptic.stamp()
+    sfx.pop()
     const b = bbox(pts)
     const W = st.clientWidth, H = st.clientHeight
     const home = seeds().find((sd) => sd.kind === res.kind)!
@@ -173,10 +176,10 @@ export default function Playground() {
   }
 
   return (
-    <section id="playground" ref={section} className={`playground ${blueprint ? 'blueprint' : ''}`}>
+    <section id="playground" ref={section} className={`playground field ${blueprint ? 'blueprint' : ''}`}>
       <div className="pg-left">
         <p className="hand">go on, draw something here ↘</p>
-        <h2>Rough in. Production out.</h2>
+        <Split as="h2" className="big" text="ROUGH IN. PRODUCTION OUT." wobble={4} seed={21} />
         <p className="lede">
           I turn scribbles, Figma frames and messy requirements into fast, accessible React. Draw a box, a circle, a line or
           a zig-zag on the paper and watch it ship.

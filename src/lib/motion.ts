@@ -26,6 +26,11 @@ export function startSmoothScroll() {
   return lenis
 }
 
+export function scrollToY(y: number, done?: () => void) {
+  if (lenis) lenis.scrollTo(y, { duration: 0.9, easing: expoOut, onComplete: () => done?.() })
+  else { window.scrollTo({ top: y, behavior: prefersReducedMotion() ? 'auto' : 'smooth' }); setTimeout(() => done?.(), 900) }
+}
+
 export function scrollToId(id: string) {
   const el = document.getElementById(id)
   if (!el) return

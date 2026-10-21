@@ -1,32 +1,39 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { startSmoothScroll } from './lib/motion'
-import Nav from './sections/Nav'
-import Hero from './sections/Hero'
-import PowerBand from './sections/PowerBand'
+import { Logo, Paper, PullCord, SoundToggle } from './ui/Chrome'
+import PlugHero from './sections/PlugHero'
+import Desk from './sections/Desk'
+import Marquee from './sections/Marquee'
+import Stack from './sections/Stack'
 import Playground from './sections/Playground'
+import Words from './sections/Words'
 import Readers from './sections/Readers'
 import Work from './sections/Work'
-import Contact from './sections/Contact'
+import Heap from './sections/Heap'
 
 export default function App() {
-  const [powered, setPowered] = useState(false)
-
   useEffect(() => {
     startSmoothScroll()
   }, [])
 
   return (
     <>
-      <a className="skip" href="#playground">Skip to content</a>
-      <Nav />
+      <a className="skip" href="#desk">Skip to content</a>
+      <Logo />
+      <PullCord />
+      <SoundToggle />
       <main>
-        <Hero powered={powered} onPower={() => setPowered(true)} />
-        <PowerBand />
+        <PlugHero />
+        <Desk />
+        <Marquee />
+        <Stack />
         <Playground />
+        <Words />
         <Readers />
         <Work />
-        <Contact powered={powered} onToggle={() => setPowered((p) => !p)} />
+        <Heap />
       </main>
+      <Paper />
     </>
   )
 }

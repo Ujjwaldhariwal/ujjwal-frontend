@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useRef } from 'react'
 import { gsap, prefersReducedMotion, ScrollTrigger } from '../lib/motion'
 import PowerLoader from '../ui/PowerLoader'
+import Split from '../ui/Split'
 const MeterMap = lazy(() => import('../ui/MeterMap'))
 
 const ROWS = [
@@ -17,7 +18,7 @@ export default function Work() {
   useEffect(() => {
     if (prefersReducedMotion()) return
     const ctx = gsap.context(() => {
-      gsap.from('.stat b', {
+      gsap.from('.stat b[data-count]', {
         textContent: 0,
         duration: 1.2,
         ease: 'power2.out',
@@ -35,8 +36,8 @@ export default function Work() {
   }, [])
 
   return (
-    <section id="work" className="work" ref={ref}>
-      <h2>Work that carries real load.</h2>
+    <section id="work" className="work field" ref={ref}>
+      <Split as="h2" className="big" text="WORK THAT CARRIES REAL LOAD." wobble={3} seed={9} />
       <p className="sub">Dashboards, portals and checkouts that people use every day. Built front to back, polished front first.</p>
 
       <div className="feature">
@@ -51,9 +52,9 @@ export default function Work() {
             geospatial map built with React Three Fiber, so field and office teams see the same live picture.
           </p>
           <div className="stats">
-            <div className="stat"><span className="v">−<b>35</b>%</span>network calls</div>
+            <div className="stat"><span className="v">−<b data-count>35</b>%</span>network calls</div>
             <div className="stat"><span className="v">&lt;<b>2</b>s</span>TTFB</div>
-            <div className="stat"><span className="v">+<b>25</b>%</span>engagement</div>
+            <div className="stat"><span className="v">+<b data-count>25</b>%</span>engagement</div>
           </div>
           <p className="stack">React · TypeScript · R3F · Visx · React Query · Node · Postgres</p>
         </div>
