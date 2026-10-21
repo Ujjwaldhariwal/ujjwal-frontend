@@ -1,4 +1,5 @@
 import { forwardRef } from 'react'
+import { haptic } from '../lib/haptics'
 
 type Props = { on: boolean; onToggle: () => void; label: string; size?: 'md' | 'lg' }
 
@@ -10,7 +11,7 @@ const Switch = forwardRef<HTMLButtonElement, Props>(({ on, onToggle, label, size
     className={`rocker-switch ${size} ${on ? 'on' : ''}`}
     aria-pressed={on}
     aria-label={label}
-    onClick={onToggle}
+    onClick={() => { haptic.pulse(); onToggle() }}
   >
     <span className="plate">
       <span className="rocker">

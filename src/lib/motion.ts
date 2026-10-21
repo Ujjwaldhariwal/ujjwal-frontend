@@ -9,10 +9,17 @@ export const prefersReducedMotion = () =>
 
 let lenis: Lenis | null = null
 
+const expoOut = (t: number) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t))
+
 /** One Lenis instance driven by GSAP's ticker so ScrollTrigger and smooth scroll never drift apart. */
 export function startSmoothScroll() {
   if (lenis || prefersReducedMotion()) return lenis
-  lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1 })
+  lenis = new Lenis({
+    lerp: 0.14, // snappier follow (was 0.1)
+    wheelMultiplier: 1.12,
+    touchMultiplier: 1.25,
+    smoothWheel: true,
+  })
   lenis.on('scroll', ScrollTrigger.update)
   gsap.ticker.add((t) => lenis?.raf(t * 1000))
   gsap.ticker.lagSmoothing(0)
@@ -22,7 +29,8 @@ export function startSmoothScroll() {
 export function scrollToId(id: string) {
   const el = document.getElementById(id)
   if (!el) return
-  if (lenis) lenis.scrollTo(el, { duration: 1.4, easing: (t) => 1 - Math.pow(1 - t, 4) })
+  // exponential ease-out: moves immediately, settles softly
+  if (lenis) lenis.scrollTo(el, { duration: 0.75, easing: expoOut })
   else el.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
 }
 

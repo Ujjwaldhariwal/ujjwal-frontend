@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { gsap, prefersReducedMotion, scrollToId, ScrollTrigger } from '../lib/motion'
+import { haptic } from '../lib/haptics'
 import { bbox, demoStroke, recognize, toPath, type Kind, type Pt } from '../lib/recognize'
 import { ShippedButton, NightToggle, TimelineSlider, CallsChart } from '../ui/Components'
 
@@ -52,6 +53,7 @@ export default function Playground() {
       return
     }
     setHint(null)
+    haptic.stamp()
     const b = bbox(pts)
     const W = st.clientWidth, H = st.clientHeight
     const home = seeds().find((sd) => sd.kind === res.kind)!

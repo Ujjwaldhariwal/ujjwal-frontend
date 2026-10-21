@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useRef } from 'react'
 import { gsap, prefersReducedMotion, ScrollTrigger } from '../lib/motion'
+import PowerLoader from '../ui/PowerLoader'
 const MeterMap = lazy(() => import('../ui/MeterMap'))
 
 const ROWS = [
@@ -39,7 +40,7 @@ export default function Work() {
       <p className="sub">Dashboards, portals and checkouts that people use every day. Built front to back, polished front first.</p>
 
       <div className="feature">
-        <Suspense fallback={<div className="meter-map" />}>
+        <Suspense fallback={<PowerLoader />}>
           <MeterMap />
         </Suspense>
         <div className="ft">

@@ -13,6 +13,7 @@ export default function Nav() {
   const [active, setActive] = useState('grid')
   const [progress, setProgress] = useState(0)
   const [hidden, setHidden] = useState(false)
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     const triggers = LINKS.map(({ id }) =>
@@ -42,13 +43,17 @@ export default function Nav() {
       <button className="nav-name" onClick={() => scrollToId('grid')}>
         Ujjwal Dhariwal
       </button>
-      <nav aria-label="Sections">
+      <button className="nav-menu" aria-expanded={open} aria-controls="nav-sheet" onClick={() => setOpen((o) => !o)}>
+        {open ? 'Close' : LINKS.find((l) => l.id === active)?.label ?? 'Menu'}
+        <span aria-hidden="true" className="chev">{open ? '×' : '▾'}</span>
+      </button>
+      <nav aria-label="Sections" id="nav-sheet" className={open ? 'open' : ''}>
         {LINKS.map((l) => (
           <button
             key={l.id}
             className={active === l.id ? 'on' : ''}
             aria-current={active === l.id ? 'true' : undefined}
-            onClick={() => scrollToId(l.id)}
+            onClick={() => { setOpen(false); scrollToId(l.id) }}
           >
             {l.label}
           </button>

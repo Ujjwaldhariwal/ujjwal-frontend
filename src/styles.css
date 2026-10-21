@@ -37,7 +37,16 @@ a { color: inherit; }
 .nav nav button { font-size: 15px; opacity: .62; transition: opacity .2s; }
 .nav nav button.on, .nav nav button:hover { opacity: 1; }
 .nav-progress { position: absolute; left: 0; right: 0; top: 0; height: 2px; background: #fff; transform-origin: 0 50%; opacity: .5; }
-@media (max-width: 760px) { .nav nav button:not(.on) { display: none; } }
+
+.nav-menu { display: none; }
+@media (max-width: 760px) {
+  .nav { mix-blend-mode: normal; background: linear-gradient(rgba(16,22,58,.92), rgba(16,22,58,0)); }
+  .nav-menu { display: inline-flex; gap: 8px; align-items: center; font-size: 15px; padding: 10px 14px; margin-right: -14px; min-height: 44px; }
+  .nav nav { position: absolute; top: 64px; right: var(--pad); flex-direction: column; gap: 0; background: var(--night-2); border: 1px solid var(--line); border-radius: 14px; padding: 6px; min-width: 190px; box-shadow: 0 18px 40px rgba(0,0,0,.4); opacity: 0; transform: translateY(-8px); pointer-events: none; transition: opacity .2s, transform .2s; }
+  .nav nav.open { opacity: 1; transform: none; pointer-events: auto; }
+  .nav nav button { opacity: 1; text-align: left; padding: 12px 14px; border-radius: 10px; min-height: 44px; color: var(--soft); }
+  .nav nav button.on { background: rgba(255,181,71,.12); color: var(--sodium); }
+}
 
 /* ---------- hero ---------- */
 .hero { position: relative; height: 100svh; min-height: 640px; overflow: hidden; background: var(--night); touch-action: pan-y; }
@@ -266,3 +275,15 @@ a { color: inherit; }
   .seam:not(:first-of-type) .knob { opacity: 0; }
   .r-bar .chips { flex-wrap: nowrap; overflow-x: auto; width: 100%; padding-bottom: 4px; scrollbar-width: none; }
 }
+
+/* loader for the 3D map: same box as the map, so the layout never jumps */
+.power-loader { display: grid; place-content: center; justify-items: center; gap: 18px; cursor: default; }
+.loader-scope { position: relative; width: 180px; height: 64px; border: 1px solid rgba(255,181,71,.55); border-radius: 8px; overflow: hidden; background: rgba(255,181,71,.04);
+  background-image: linear-gradient(rgba(255,181,71,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,181,71,.08) 1px, transparent 1px); background-size: 18px 16px; }
+.loader-wave { position: absolute; inset: 0; width: 200%; height: 100%; animation: wave 1.6s linear infinite; }
+.loader-wave path { fill: none; stroke: var(--sodium); stroke-width: 2; filter: drop-shadow(0 0 4px rgba(255,181,71,.8)); }
+@keyframes wave { to { transform: translateX(-50%); } }
+.loader-scanline { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--hot); box-shadow: 0 0 10px var(--sodium); animation: scan 1.4s ease-in-out infinite alternate; }
+@keyframes scan { from { left: 0; } to { left: calc(100% - 2px); } }
+.loader-meta { display: flex; gap: 10px; align-items: center; font-size: 14px; color: var(--mist); }
+.live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sodium); box-shadow: 0 0 10px var(--sodium); animation: blink 1s steps(1) infinite; }
