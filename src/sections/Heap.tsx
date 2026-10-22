@@ -21,7 +21,7 @@ type Thing = {
 const THINGS: Thing[] = [
   { id: 'mail', label: EMAIL, shape: 'tag', w: 300, h: 64, cls: 't-mail', action: 'copy' },
   { id: 'gh', label: 'GitHub', shape: 'circle', w: 112, h: 112, cls: 't-ink', href: 'https://github.com/Ujjwaldhariwal' },
-  { id: 'li', label: 'LinkedIn', shape: 'circle', w: 112, h: 112, cls: 't-lilac', href: 'https://linkedin.com/in/ujjwal-dhariwal' },
+  { id: 'li', label: 'LinkedIn', shape: 'circle', w: 112, h: 112, cls: 't-lilac', href: 'https://www.linkedin.com/in/ujjwal-d-68880222a/' },
   { id: 'cv', label: 'Résumé', shape: 'circle', w: 112, h: 112, cls: 't-mint', href: '/resume.pdf' },
   { id: 'hire', label: 'Hire me', shape: 'pill', w: 170, h: 66, cls: 't-yellow' },
   { id: 'react', label: 'React', shape: 'circle', w: 92, h: 92, cls: 't-mint' },
@@ -224,7 +224,7 @@ export default function Heap() {
 
       <footer className="heap-foot">
         <a href="https://github.com/Ujjwaldhariwal" target="_blank" rel="noreferrer">GitHub</a>
-        <a href="https://linkedin.com/in/ujjwal-dhariwal" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/ujjwal-d-68880222a/" target="_blank" rel="noreferrer">LinkedIn</a>
         <a href="/resume.pdf" target="_blank" rel="noreferrer">Résumé (PDF)</a>
         <span>Built with React, Three.js, GSAP and Matter.js</span>
       </footer>
